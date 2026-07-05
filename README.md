@@ -16,7 +16,7 @@ A framework-agnostic, fully internationalized calendar for the web.
 📦 **npm:** <https://www.npmjs.com/package/multilang-calendar>
 🚀 **Live demo:** <https://calendarmulti.netlify.app/>
 
-![multilang-calendar screenshot](./screenshot.png)
+![multilang-calendar screenshot](https://raw.githubusercontent.com/eyoussef/multilang-calendar/main/screenshot.png)
 
 ## Install
 

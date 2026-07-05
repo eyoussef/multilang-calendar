@@ -1,6 +1,6 @@
 {
   "name": "multilang-calendar",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A framework-agnostic, fully internationalized calendar with built-in locale dictionaries (incl. Tamazight/Tifinagh), Gregorian, Hijri/Islamic, Persian, Hebrew and Amazigh (Berber) calendar systems, date selection, ranges and event markers.",
   "type": "module",
   "license": "MIT",
