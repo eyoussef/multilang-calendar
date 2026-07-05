@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multilang-calendar — demo</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        padding: 32px;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      h1 { font-size: 1.25rem; }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      select, button {
+        font: inherit;
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #fff;
+      }
+      .stage { display: flex; gap: 24px; flex-wrap: wrap; }
+      code { background: #e2e8f0; padding: 1px 5px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>multilang-calendar</h1>
+    <p>
+      Framework-agnostic calendar with built-in locale dictionaries (incl.
+      Tamazight / Tifinagh), Gregorian + Hijri/Islamic, date selection, ranges
+      and event markers.
+    </p>
+
+    <div class="controls">
+      <label>Language
+        <select id="locale">
+          <option value="en">English</option>
+          <option value="ar">العربية (Arabic)</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="zh">中文</option>
+          <option value="zgh">ⵜⴰⵎⴰⵣⵉⵖⵜ (Tamazight / Tifinagh)</option>
+        </select>
+      </label>
+      <label>Calendar
+        <select id="calendar">
+          <option value="gregory">Gregorian</option>
+          <option value="islamic-umalqura">Hijri (Umm al-Qura)</option>
+          <option value="persian">Persian</option>
+          <option value="hebrew">Hebrew</option>
+          <option value="amazigh">Amazigh (Berber) ⴰⵎ</option>
+        </select>
+      </label>
+      <label>View
+        <select id="view">
+          <option value="month">Month</option>
+          <option value="week" selected>Week</option>
+          <option value="day">Day</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="weeks" /> Week numbers</label>
+    </div>
+
+    <div class="stage">
+      <intl-calendar id="cal"></intl-calendar>
+      <div>
+        <p>Selected: <code id="out">—</code></p>
+        <p>Last event: <code id="evt">—</code></p>
+      </div>
+    </div>
+
+    <script type="module" src="/examples/dev/main.ts"></script>
+  </body>
+</html>

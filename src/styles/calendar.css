@@ -1,0 +1,423 @@
+/**
+ * Default styling for multilang-calendar.
+ *
+ * All classes are prefixed with `.mlc-` and scoped under `.mlc-calendar` so
+ * the stylesheet is safe to include globally. The web component instead
+ * adopts this same CSS through a Shadow DOM style, so the same selectors apply
+ * inside the shadow root (without the outer `.mlc-calendar` wrapper).
+ */
+
+.mlc-calendar {
+  --mlc-accent: #2563eb;
+  --mlc-accent-weak: #dbeafe;
+  --mlc-range: #eff6ff;
+  --mlc-fg: #111827;
+  --mlc-fg-muted: #6b7280;
+  --mlc-border: #e5e7eb;
+  --mlc-bg: #ffffff;
+  --mlc-today: #111827;
+  --mlc-radius: 10px;
+  --mlc-gap: 6px;
+  --mlc-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ebrima", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Noto Kufi Arabic", "Noto Sans Tifinagh",
+    sans-serif;
+
+  font-family: var(--mlc-font);
+  color: var(--mlc-fg);
+  background: var(--mlc-bg);
+  border: 1px solid var(--mlc-border);
+  border-radius: var(--mlc-radius);
+  padding: 14px;
+  width: min(360px, 92vw);
+  box-sizing: border-box;
+  user-select: none;
+  direction: ltr;
+}
+
+.mlc-calendar[data-rtl="true"] {
+  direction: rtl;
+}
+
+.mlc-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.mlc-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+}
+
+.mlc-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mlc-btn {
+  appearance: none;
+  border: 1px solid var(--mlc-border);
+  background: transparent;
+  color: var(--mlc-fg);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.mlc-btn:hover {
+  background: var(--mlc-accent-weak);
+  border-color: var(--mlc-accent);
+}
+
+.mlc-today-btn {
+  width: auto;
+  padding: 0 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.mlc-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--mlc-gap);
+}
+
+.mlc-grid.with-weeks {
+  grid-template-columns: 32px repeat(7, 1fr);
+}
+
+.mlc-weekday {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--mlc-fg-muted);
+  padding: 4px 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  min-width: 0;
+}
+
+.mlc-week-num {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--mlc-fg-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mlc-cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.82rem;
+  background: transparent;
+  color: var(--mlc-fg);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.mlc-cell:hover:not(.mlc-disabled) {
+  background: var(--mlc-accent-weak);
+}
+
+.mlc-cell.mlc-out {
+  color: var(--mlc-fg-muted);
+  opacity: 0.55;
+}
+
+.mlc-cell.mlc-today {
+  font-weight: 700;
+  border-color: var(--mlc-today);
+}
+
+.mlc-cell.mlc-disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.mlc-cell.mlc-selected,
+.mlc-cell.mlc-selected-edge {
+  background: var(--mlc-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.mlc-cell.mlc-in-range {
+  background: var(--mlc-range);
+  border-radius: 0;
+}
+
+.mlc-cell.mlc-in-range.mlc-selected-edge {
+  border-radius: 8px;
+}
+
+.mlc-dots {
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+
+.mlc-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mlc-accent);
+}
+
+.mlc-dot + .mlc-dot {
+  margin-left: 2px;
+}
+
+/* ---------- View switcher ---------- */
+
+.mlc-view-switch {
+  display: inline-flex;
+  border: 1px solid var(--mlc-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 6px;
+}
+
+.mlc-view-btn {
+  appearance: none;
+  border: none;
+  border-right: 1px solid var(--mlc-border);
+  background: transparent;
+  color: var(--mlc-fg-muted);
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.mlc-view-btn:last-child {
+  border-right: none;
+}
+
+.mlc-view-btn:hover {
+  background: var(--mlc-accent-weak);
+}
+
+.mlc-view-btn[aria-pressed="true"] {
+  background: var(--mlc-accent);
+  color: #fff;
+}
+
+/* ---------- Time-grid (week & day views) ---------- */
+
+.mlc-calendar {
+  --mlc-hour-col: 56px;
+  --mlc-hour-height: 44px;
+  --mlc-tg-maxh: 440px;
+  --mlc-event-bg: #dbeafe;
+  --mlc-event-border: var(--mlc-accent);
+}
+
+.mlc-toolbar.with-switch {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mlc-tg {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--mlc-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.mlc-tg-head,
+.mlc-tg-allday,
+.mlc-tg-body {
+  display: grid;
+  grid-template-columns: var(--mlc-hour-col) repeat(var(--mlc-day-cols, 7), 1fr);
+}
+
+.mlc-tg-corner {
+  border-bottom: 1px solid var(--mlc-border);
+  border-right: 1px solid var(--mlc-border);
+}
+
+.mlc-tg-day-head {
+  border-bottom: 1px solid var(--mlc-border);
+  border-right: 1px solid var(--mlc-border);
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--mlc-fg-muted);
+  min-width: 0;
+}
+
+.mlc-tg-day-head .mlc-tg-daynum {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--mlc-fg);
+  margin-top: 2px;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.mlc-tg-day-head.mlc-today .mlc-tg-daynum {
+  background: var(--mlc-accent);
+  color: #fff;
+}
+
+.mlc-tg-allday-label,
+.mlc-tg-hour-label {
+  border-right: 1px solid var(--mlc-border);
+  font-size: 0.7rem;
+  color: var(--mlc-fg-muted);
+  padding: 2px 4px;
+  text-align: right;
+}
+
+.mlc-tg-allday-cell {
+  border-right: 1px solid var(--mlc-border);
+  border-bottom: 1px solid var(--mlc-border);
+  padding: 2px 3px;
+  min-height: 22px;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.mlc-tg-all-day-chip {
+  font-size: 0.66rem;
+  background: var(--mlc-event-bg);
+  color: var(--mlc-fg);
+  border: 1px solid var(--mlc-event-border);
+  border-radius: 4px;
+  padding: 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.mlc-tg-body {
+  max-height: var(--mlc-tg-maxh);
+  overflow-y: auto;
+  position: relative;
+}
+
+.mlc-tg-hours {
+  display: flex;
+  flex-direction: column;
+}
+
+.mlc-tg-hour-label {
+  height: var(--mlc-hour-height);
+  border-top: 1px solid var(--mlc-border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 2px 4px;
+  box-sizing: border-box;
+}
+
+.mlc-tg-cols {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--mlc-day-cols, 7), 1fr);
+  grid-column: 2 / -1;
+  height: calc(var(--mlc-tg-hours, 24) * var(--mlc-hour-height));
+}
+
+.mlc-tg-day-col {
+  position: relative;
+  height: 100%;
+  border-right: 1px solid var(--mlc-border);
+  min-width: 0;
+  background-image: linear-gradient(
+    to bottom,
+    var(--mlc-border) 1px,
+    transparent 1px
+  );
+  background-size: 100% var(--mlc-hour-height);
+}
+
+.mlc-tg-day-col.mlc-today-col {
+  background-color: color-mix(in srgb, var(--mlc-accent) 6%, transparent);
+}
+
+.mlc-event {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  background: var(--mlc-event-bg);
+  border-left: 3px solid var(--mlc-event-border);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 0.68rem;
+  line-height: 1.15;
+  color: var(--mlc-fg);
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.mlc-event-title {
+  font-weight: 600;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mlc-event-time {
+  color: var(--mlc-fg-muted);
+  font-size: 0.62rem;
+}
+
+.mlc-now-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ef4444;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.mlc-now-line::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
